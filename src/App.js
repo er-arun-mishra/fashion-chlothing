@@ -7,8 +7,12 @@ import { connect } from 'react-redux';
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component'
 import Header from './components/header/header.componenet';
+import CheckoutPage from './pages/checkout/checkout.component';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+
 import { setCurrentUser} from './redux/user/user.action';
+import { selectCurrentUser } from  './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect'
 
 class App extends React.Component{
   // NOTE CONSTRUCTOR AND COMPONENTDIDMOUNT METHOD THAT IS COMMENTED USES THE NAIVE APPROACH OF SETTING STATE (this.setState) AND NOT REDUX 
@@ -78,6 +82,7 @@ class App extends React.Component{
         <Route exact path='/' component={HomePage}/>
         <Route path='/shop' component={ShopPage}/>
         <Route path='/signin' render={ ()=> this.props.currentUser? (<Redirect to="/"/>): (<SignInAndSignUpPage/>) } />
+        <Route exact path='/checkout' component={CheckoutPage}/>
         <Route/>
       </Switch>
 
@@ -87,9 +92,9 @@ class App extends React.Component{
 
 }
 
-const matchStateToProps = ({user}) => ({
-  currentUser : user.currentUser
-})
+const matchStateToProps = createStructuredSelector({
+  currentUser : selectCurrentUser
+});
 
 const matchDispatchToProps = dispatch => ({
     setCurrentUser : user => dispatch(setCurrentUser(user))
