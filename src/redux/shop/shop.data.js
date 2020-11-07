@@ -183,7 +183,7 @@ const SHOP_DATA = [
       },
       {
         id: 27,
-        name: 'Striped Sweater',
+        name: 'Diksha Favourite',
         imageUrl: 'https://i.ibb.co/KmSkMbH/striped-sweater.png',
         price: 45
       },
